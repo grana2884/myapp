@@ -6,14 +6,15 @@
 </head>
 <body>
 
-"Hello World"
-<form id="register_form" method="post" action="" enctype="multipart/form-data">
-    {% csrf_token %}
+{% block title %} Hello World {% endblock %}
 
-    {{ user_form.as_p }}
-    {{ profile_form.as_p }}
+<ul>
+    <li><a href="{%  url 'register' %}">Register</a></li>
+</ul>
 
-    <input type="submit" name="submit" value="Create" />
-</form>
+{% block content %}
+
+{% endblock %}
+
 </body>
 </html>

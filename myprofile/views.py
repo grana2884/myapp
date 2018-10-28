@@ -28,7 +28,7 @@ def create_profile(request):
         user_form = UserForm()
         profile_form = ProfileForm()
 
-    return render(request, 'base.html', {'user_form': user_form, 'profile_form': profile_form, 'registered': registered}
+    return render(request, 'register.html', {'user_form': user_form, 'profile_form': profile_form, 'registered': registered}
                   )
 
 
