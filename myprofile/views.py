@@ -3,7 +3,7 @@ from myprofile.forms import ProfileForm, UserForm
 
 
 def index(request):
-    return render(request, 'base.html')
+    return render(request, 'home.html')
 
 
 def create_profile(request):
@@ -28,8 +28,8 @@ def create_profile(request):
         user_form = UserForm()
         profile_form = ProfileForm()
 
-    return render(request, 'register.html', {'user_form': user_form, 'profile_form': profile_form, 'registered': registered}
-                  )
+    return render(request, 'register.html', {'user_form': user_form, 'profile_form': profile_form, 'registered':
+        registered})
 
 
 def update_profile():
@@ -41,6 +41,7 @@ def delete_profile():
 
 
 def login_profile():
+
     pass
 
 

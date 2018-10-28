@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+<ul>
+    <li><a href="{%  url 'register' %}">Register</a></li>
+    <li><a href="{%  url 'login' %}">Login</a></li>
+    <li><a href="{%  url 'change_password' %}">Change Password</a></li>
+</ul>
+{% endblock %}
