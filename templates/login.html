@@ -5,10 +5,9 @@
 {% block content %}
 <form id="login_form" method="post" action="{% url 'login' %}" enctype="multipart/form-data">
     {% csrf_token %}
-
-    {{ user_form.as_p }}
-    {{ profile_form.as_p }}
-
+    Username: <input type="text" name="username" value="" size="50">
+    <br/>
+    Password: <input type="password" name="password" value="" size="50">
     <input type="submit" name="login" value="Login" />
 </form>
 {% endblock %}

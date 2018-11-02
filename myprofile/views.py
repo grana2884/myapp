@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import login, logout, authenticate
+from django.http import HttpResponseRedirect
 from myprofile.forms import ProfileForm, UserForm
 
 
@@ -34,13 +36,25 @@ def delete_profile():
     pass
 
 
-def login_profile():
+def login_profile(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username=username, password=password)
+        if user:
+            if user.is_active:
+                login(request, user)
+                return redirect('index')
+        else:
+            print("Invalid Login")
+            return redirect('index')
+    else:
+        return render(request, 'login.html', {})
 
-    pass
 
-
-def logout_profile():
-    pass
+def logout_profile(request):
+    logout(request)
+    return redirect('index')
 
 
 def perm_profile():
