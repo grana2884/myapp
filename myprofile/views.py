@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from myprofile.forms import ProfileForm, UserForm
-
+from myprofile.models import Profile, User
 
 def index(request):
     return render(request, 'home.html')
@@ -33,8 +33,11 @@ def update_profile():
     pass
 
 
-def delete_profile():
-    pass
+def delete_profile(request):
+    u = User.objects.get(pk=request.user.pk)
+    u.delete()
+    messages.success(request, 'Profile deleted')
+    return redirect('index')
 
 
 def login_profile(request):
@@ -47,8 +50,10 @@ def login_profile(request):
                 login(request, user)
                 messages.success(request, 'User logged in')
                 return redirect('index')
+            else:
+                messages.warning(request, 'Account is disabled')
         else:
-            messages.warning(request, 'Invalid Login')
+            messages.error(request, 'Invalid Login')
             return render(request, 'login.html', {})
     else:
         return render(request, 'login.html', {})
