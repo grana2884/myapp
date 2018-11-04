@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
+from django.contrib import messages
 from myprofile.forms import ProfileForm, UserForm
 
 
@@ -18,9 +19,10 @@ def create_profile(request):
             profile = profile_form.save(commit=False)
             profile.user = user
             profile.save()
+            messages.success(request, 'Your profile has been created')
             return redirect('index')
         else:
-            print(user_form.errors, profile_form.errors)
+            messages.error(request, user_form.errors)
     else:
         user_form = UserForm()
         profile_form = ProfileForm()
@@ -43,16 +45,18 @@ def login_profile(request):
         if user:
             if user.is_active:
                 login(request, user)
+                messages.success(request, 'User logged in')
                 return redirect('index')
         else:
-            print("Invalid Login")
-            return redirect('index')
+            messages.warning(request, 'Invalid Login')
+            return render(request, 'login.html', {})
     else:
         return render(request, 'login.html', {})
 
 
 def logout_profile(request):
     logout(request)
+    messages.success(request, 'User logged out')
     return redirect('index')
 
 
