@@ -27,7 +27,7 @@ def create_profile(request):
     else:
         user_form = UserForm()
         profile_form = ProfileForm()
-    return render(request, 'register.html', {'user_form': user_form, 'profile_form': profile_form})
+    return render(request, 'myprofile/register.html', {'user_form': user_form, 'profile_form': profile_form})
 
 
 def update_profile(request):
@@ -39,7 +39,7 @@ def update_profile(request):
         messages.success(request, 'Profile has been updated')
         return redirect('index')
     else:
-        return render(request, 'update.html', {})
+        return render(request, 'myprofile/update.html', {})
 
 
 def delete_profile(request):
@@ -63,9 +63,9 @@ def login_profile(request):
                 messages.warning(request, 'Account is disabled')
         else:
             messages.error(request, 'Invalid Login')
-            return render(request, 'login.html', {})
+            return render(request, 'myprofile/login.html', {})
     else:
-        return render(request, 'login.html', {})
+        return render(request, 'myprofile/login.html', {})
 
 
 def logout_profile(request):
@@ -83,7 +83,7 @@ def change_password(request):
         messages.success(request, 'Password has been updated')
         return redirect('index')
     else:
-        return render(request, 'change.html', {})
+        return render(request, 'myprofile/change.html', {})
 
 
 def reset_password():
