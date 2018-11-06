@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from myprofile.forms import ProfileForm, UserForm
-from myprofile.models import Profile, User
+from myprofile.models import User, Profile
+
 
 def index(request):
     return render(request, 'home.html')
@@ -29,8 +30,16 @@ def create_profile(request):
     return render(request, 'register.html', {'user_form': user_form, 'profile_form': profile_form})
 
 
-def update_profile():
-    pass
+def update_profile(request):
+    if request.method == 'POST':
+        mobile = request.POST.get('mobile')
+        p = Profile.objects.get(user=User.objects.get(pk=request.user.pk))
+        p.mobile = mobile
+        p.save()
+        messages.success(request, 'Profile has been updated')
+        return redirect('index')
+    else:
+        return render(request, 'update.html', {})
 
 
 def delete_profile(request):
@@ -65,12 +74,16 @@ def logout_profile(request):
     return redirect('index')
 
 
-def perm_profile():
-    pass
-
-
-def change_password():
-    pass
+def change_password(request):
+    if request.method == 'POST':
+        password = request.POST.get('password')
+        user = User.objects.get(pk=request.user.pk)
+        user.set_password(password)
+        user.save()
+        messages.success(request, 'Password has been updated')
+        return redirect('index')
+    else:
+        return render(request, 'change.html', {})
 
 
 def reset_password():

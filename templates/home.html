@@ -10,14 +10,14 @@
     {% endif %}
 <ul>
     {% if not user.is_authenticated %}
-    <li><a href="{%  url 'register' %}">Register</a></li>
-    <li><a href="{%  url 'login' %}">Login</a></li>
-    {% endif %}
-    <li><a href="{%  url 'change_password' %}">Change Password</a></li>
-    <li><a href="{%  url 'reset_password' %}">Reset Password</a></li>
-    {% if user.is_authenticated %}
-    <li><a href="{% url 'delete_profile' %}">Delete Profile</a> </li>
-    <li><a href="{%  url 'logout' %}">Logout</a></li>
+        <li><a href="{%  url 'register' %}">Register</a></li>
+        <li><a href="{%  url 'login' %}">Login</a></li>
+        <li><a href="{%  url 'reset_password' %}">Reset Password</a></li>
+    {% else %}
+        <li><a href="{% url 'change_password' %}">Change Password</a></li>
+        <li><a href="{% url 'update_profile' %}">Update Profile</a></li>
+        <li><a href="{% url 'delete_profile' %}">Delete Profile</a> </li>
+        <li><a href="{%  url 'logout' %}">Logout</a></li>
     {% endif %}
 </ul>
 {% endblock %}

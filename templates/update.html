@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %} Update {% endblock %}
+
+{% block content %}
+<form id="update_form" method="post" action="{% url 'update_profile' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    Mobile: <input type="text" name="mobile" value={{ user.profile.mobile }} size="50">
+
+    <input type="submit" name="update" value="Update" />
+</form>
+{% endblock %}

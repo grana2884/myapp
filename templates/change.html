@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %} Update Password {% endblock %}
+
+{% block content %}
+<form id="change_form" method="post" action="{% url 'change_password' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    Change Password: <input type="password" name="password" value="" size="50">
+
+    <input type="submit" name="change" value="Change Password" />
+</form>
+{% endblock %}
